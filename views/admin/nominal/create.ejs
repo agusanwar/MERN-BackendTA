@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data Kategory</h1>
+          <h1>Data Nominal</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/category">Category</a></li>
+            <li class="breadcrumb-item"><a href="/nominal">Nominal</a></li>
             <li class="breadcrumb-item active">Add Data</li>
           </ol>
         </div>
@@ -29,20 +29,45 @@
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Form Kategory</h3>
+              <h3 class="card-title">Form Nominal</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/category/create" method="post">
+            <form action="/nominal/create" method="post">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="name">Masukan Tambah Kategory</label>
+                  <label>Nama Coin</label>
+                  <select
+                    class="form-control select2"
+                    style="width: 100%"
+                    name="coinName"
+                    required
+                  >
+                    <option selected="selected">Pilih Coin</option>
+                    <option value="Gold">Emas</option>
+                    <option value="Diamond">Diamond</option>
+                    <option class="Jewel">Jewel</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="coinQuantity">Jumlah Coin</label>
                   <input
-                    type="text"
-                    name="name"
+                    type="number"
+                    name="coinQuantity"
                     class="form-control"
-                    id="name"
-                    placeholder="Enter name kategory"
+                    id="coinQuantity"
+                    placeholder="Enter Coin Quantity"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="price">Harga</label>
+                  <input
+                    type="number"
+                    name="price"
+                    class="form-control"
+                    id="price"
+                    placeholder="Enter Coin Quantity"
                     required
                   />
                 </div>

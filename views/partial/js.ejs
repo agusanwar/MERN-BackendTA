@@ -14,6 +14,8 @@
 <!-- bs-custom-file-input -->
 <script src="/adminLte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script src="/adminLte/plugins/chart.js/Chart.min.js"></script>
+<!-- Select2 -->
+<script src="/adminLte/plugins/select2/js/select2.full.min.js"></script>
 <!-- Sparkline -->
 <script src="/adminLte/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
@@ -50,6 +52,8 @@
 <script src="/adminLte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/adminLte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
+  //Initialize Select2 Elements
+  $(".select2").select2();
   $(function () {
     $("#example1")
       .DataTable({

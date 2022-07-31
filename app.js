@@ -3,11 +3,18 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
 // Midelware post to put
 const methodOverride = require("method-override");
+// exppress sesssion
+const session = require("express-session");
+// connect alert
+const flash = require("connect-flash");
 
-var dashboardRouter = require("./dashboard/router");
-var categoryRouter = require("./app/category/router");
+// router dashboard
+const dashboardRouter = require("./dashboard/router");
+const categoryRouter = require("./app/category/router");
+const nominalRouter = require("./app/nominal/router");
 
 var app = express();
 
@@ -15,6 +22,17 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// for use npm express-session
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {},
+  })
+);
+// for use npm express-flash
+app.use(flash());
 // Midelware post to put
 app.use(methodOverride("_method"));
 //middleware
@@ -30,8 +48,10 @@ app.use(
   express.static(path.join(__dirname, "node_modules/admin-lte"))
 );
 
+// dashboard
 app.use("/", dashboardRouter);
 app.use("/category", categoryRouter);
+app.use("/nominal", nominalRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
