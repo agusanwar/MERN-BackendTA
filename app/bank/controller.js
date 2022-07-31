@@ -1,4 +1,4 @@
-const Category = require("./model");
+const Bank = require("./model");
 
 module.exports = {
   index: async (req, res) => {
@@ -11,26 +11,26 @@ module.exports = {
         message: alertMessage,
         status: alertStatus,
       };
-      const category = await Category.find();
-      res.render("admin/category/view_category", {
-        category,
+      const bank = await Bank.find();
+      res.render("admin/bank/view_bank", {
+        bank,
         alert,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");
-      res.redirect("/category");
+      res.redirect("/bank");
       // console.log(err.message);
     }
   },
 
   viewCreate: async (req, res) => {
     try {
-      res.render("admin/category/create");
+      res.render("admin/bank/create");
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");
-      res.redirect("/category");
+      res.redirect("/bank");
       // console.log(err);
     }
   },
@@ -38,38 +38,38 @@ module.exports = {
   // model category
   actionCreate: async (req, res) => {
     try {
-      const { name } = req.body;
+      const { name, nameBank, noRekening } = req.body;
 
-      let category = await Category({ name });
-      await category.save();
+      let bank = await Bank({ name, nameBank, noRekening });
+      await bank.save();
 
       // Alert message
-      req.flash("alertMessage", `Create category  success`);
+      req.flash("alertMessage", `Create Bank  success`);
       req.flash("alertStatus", "success");
 
-      res.redirect("/category");
+      res.redirect("/bank");
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");
-      res.redirect("/category");
+      res.redirect("/bank");
       // console.log(err);
     }
   },
 
-  // model category
+  // model Nominal
   viewEdit: async (req, res) => {
     try {
       const { id } = req.params;
 
-      const category = await Category.findOne({ _id: id });
+      const bank = await Bank.findOne({ _id: id });
 
-      res.render("admin/category/edit", {
-        category,
+      res.render("admin/bank/edit", {
+        bank,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");
-      res.redirect("/category");
+      res.redirect("/bank");
       // console.log(err);
     }
   },
@@ -78,25 +78,25 @@ module.exports = {
   actionEdit: async (req, res) => {
     try {
       const { id } = req.params;
-      const { name } = req.body;
+      const { name, nameBank, noRekening } = req.body;
 
-      await Category.findOneAndUpdate(
+      await Bank.findOneAndUpdate(
         {
           _id: id,
         },
-        { name }
+        { name, nameBank, noRekening }
       );
 
       // Alert message
-      req.flash("alertMessage", `Update category  success`);
+      req.flash("alertMessage", `Update bank  success`);
       req.flash("alertStatus", "success");
 
-      res.redirect("/category");
+      res.redirect("/bank");
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");
-      res.redirect("/category");
-      // console.log(err);
+      res.redirect("/bank");
+      console.log(err);
     }
   },
 
@@ -104,19 +104,18 @@ module.exports = {
   actionDelete: async (req, res) => {
     try {
       const { id } = req.params;
-
-      await Category.findByIdAndRemove({
+      await Bank.findByIdAndRemove({
         _id: id,
       });
       // Alert message
-      req.flash("alertMessage", `Delete category  success`);
+      req.flash("alertMessage", `Delete bank  success`);
       req.flash("alertStatus", "success");
 
-      res.redirect("/category");
+      res.redirect("/bank");
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");
-      res.redirect("/category");
+      res.redirect("/bank");
       // console.log(err);
     }
   },

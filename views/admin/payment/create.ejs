@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data Nominal</h1>
+          <h1>Data Payment</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/nominal">Nominal</a></li>
+            <li class="breadcrumb-item"><a href="/payment">Payment}</a></li>
             <li class="breadcrumb-item active">Add Data</li>
           </ol>
         </div>
@@ -29,48 +29,42 @@
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Form Nominal</h3>
+              <h3 class="card-title">Form Payment</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/nominal/create" method="post">
+            <form action="/payment/create" method="post">
               <div class="card-body">
                 <div class="form-group">
-                  <label>Nama Coin</label>
-                  <select
-                    id="coinName"
-                    class="form-control select2"
-                    style="width: 100%"
-                    name="coinName"
-                    required
-                  >
-                    <option selected="selected">Pilih Coin</option>
-                    <option value="Gold">Emas</option>
-                    <option value="Diamond">Diamond</option>
-                    <option class="Jewel">Jewel</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="coinQuantity">Jumlah Coin</label>
+                  <label for="type">Type Payment</label>
                   <input
-                    type="number"
-                    name="coinQuantity"
+                    type="text"
+                    name="type"
                     class="form-control"
-                    id="coinQuantity"
-                    placeholder="Enter Coin Quantity"
+                    id="type"
+                    placeholder="Enter Nama Pemilik"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="price">Harga</label>
-                  <input
-                    type="number"
-                    name="price"
-                    class="form-control"
-                    id="price"
-                    placeholder="Enter Coin Quantity"
-                    required
-                  />
+                  <label>Bank</label>
+                  <div class="select2-blue">
+                    <select
+                      name="banks"
+                      class="form-control select2"
+                      style="width: 100%"
+                      multiple="multiple"
+                      data-placeholder="Pilih Jenis Bank"
+                      required
+                    >
+                      <% banks.forEach(bank=>{ %>
+                      <option value="<%= bank._id %> ">
+                        <%= bank.name %> <%- bank.nameBank %> <%=
+                        bank.noRekening%>
+                      </option>
+                      ><% }) %>
+                    </select>
+                  </div>
                 </div>
               </div>
               <!-- /.card-body -->

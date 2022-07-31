@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-let nominalSchhma = mongoose.Schema({
+
+let nominalSchema = mongoose.Schema({
   coinQuantity: {
     type: Number,
     default: 0,
@@ -14,4 +15,4 @@ let nominalSchhma = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Nominal", nominalSchhma);
+module.exports = mongoose.model("Nominal", nominalSchema);
