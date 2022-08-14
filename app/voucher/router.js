@@ -10,6 +10,7 @@ const {
   viewEdit,
   actionEdit,
   actionDelete,
+  actionStatus,
 } = require("./controller");
 
 /* GET home page. */
@@ -20,8 +21,13 @@ router.post(
   multer({ dest: os.tmpdir() }).single("image"),
   actionCreate
 );
-// router.get("/edit/:id", viewEdit);
-// router.put("/edit/:id", actionEdit);
-// router.delete("/delete/:id", actionDelete);
+router.get("/edit/:id", viewEdit);
+router.put(
+  "/edit/:id",
+  multer({ dest: os.tmpdir() }).single("image"),
+  actionEdit
+);
+router.delete("/delete/:id", actionDelete);
+router.put("/status/:id", actionStatus);
 
 module.exports = router;
