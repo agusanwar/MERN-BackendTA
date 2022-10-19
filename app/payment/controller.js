@@ -16,6 +16,8 @@ module.exports = {
       res.render("admin/payment/view_payment", {
         payment,
         alert,
+        name: req.session.user.name,
+        title: "Dashboard | Payment",
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -30,6 +32,8 @@ module.exports = {
       const banks = await Bank.find();
       res.render("admin/payment/create", {
         banks,
+        name: req.session.user.name,
+        title: "Dashboard | Create Payment",
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -70,6 +74,8 @@ module.exports = {
       res.render("admin/payment/edit", {
         payment,
         banks,
+        name: req.session.user.name,
+        title: "Dashboard | Update Payment",
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -110,6 +116,31 @@ module.exports = {
       });
 
       req.flash("alertMessage", "Berhasil hapus payment");
+      req.flash("alertStatus", "success");
+
+      res.redirect("/payment");
+    } catch (err) {
+      req.flash("alertMessage", `${err.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/payment");
+    }
+  },
+
+  actionStatus: async (req, res) => {
+    try {
+      const { id } = req.params;
+      let payment = await Payment.findOne({ _id: id });
+
+      let status = payment.status === "Y" ? "N" : "Y";
+
+      payment = await Payment.findOneAndUpdate(
+        {
+          _id: id,
+        },
+        { status }
+      );
+
+      req.flash("alertMessage", "Berhasil ubah status");
       req.flash("alertStatus", "success");
 
       res.redirect("/payment");

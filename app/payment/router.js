@@ -7,6 +7,7 @@ const {
   viewEdit,
   actionEdit,
   actionDelete,
+  actionStatus,
 } = require("./controller");
 
 /* GET home page. */
@@ -15,6 +16,7 @@ router.get("/create", viewCreate);
 router.post("/create", actionCreate);
 router.get("/edit/:id", viewEdit);
 router.put("/edit/:id", actionEdit);
-// router.delete("/delete/:id", actionDelete);
+router.delete("/delete/:id", actionDelete);
+router.put("/status/:id", actionStatus);
 
 module.exports = router;
