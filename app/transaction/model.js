@@ -35,7 +35,7 @@ let TransactionSchema = mongoose.Schema(
         type: String,
         require: [true, "tipe pembayaran harus diisi"],
       },
-      nameBank: {
+      bankName: {
         type: String,
         require: [true, "nama  bank harus diisi"],
       },
